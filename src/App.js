@@ -8,6 +8,9 @@ import {MenuItem,
   from "@material-ui/core"; 
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
+import Table from './components/Table';
+import {sortData} from "./components/util";
+import LineGraph from "./components/LineGraph";
 
 function App() {
 
@@ -38,7 +41,9 @@ function App() {
           value: country.countryInfo.iso2,
         }))
 
-        setTableData(data);
+
+        const sortedData = sortData(data);
+        setTableData(sortedData);
         setCountries(countries);
       })
     }
@@ -61,7 +66,7 @@ function App() {
       setCountryVal(countryCode);
       setCountryInfo(data);
 
-      console.log(data);
+      //console.log(data);
     });
   };
 
@@ -118,12 +123,11 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
-          {/* {Table} */}
           <Table 
             countries={tableData}
           />
           <h3>Worldwide New Cases</h3>
-          {/* {Graph} */}
+          <LineGraph />
         </CardContent>
       </Card>
 
